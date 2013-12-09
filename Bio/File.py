@@ -438,6 +438,8 @@ class _SQLiteManySeqFilesDict(_IndexedSeqFileDict):
                                                "included Python 2.5+")
         if filenames is not None:
             filenames = list(filenames)  # In case it was a generator
+            # Provide absolute path for fasta files when creating the sql db
+            filenames = [os.path.abspath(x) for x in filenames]
         if os.path.isfile(index_filename):
             #Reuse the index.
             con = _sqlite.connect(index_filename)
